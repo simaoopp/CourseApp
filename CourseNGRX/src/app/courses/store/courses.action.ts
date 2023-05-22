@@ -24,12 +24,23 @@ export const saveCourseAPISucess = createAction(
 
 //put
 export const invokeUpdateCourseApi = createAction(
-    '[Course API] invoke Update Course API',
-    props<{ payload: Course }>()
-  );
-  
-  export const updateCourseAPISucess = createAction(
-    '[Course API] Save Course API Sucess',
-    props<{ response: Course }>()
-  );
-  
+  '[Course API] invoke Update Course API',
+  props<{ payload: Course }>()
+);
+
+export const updateCourseAPISucess = createAction(
+  '[Course API] Save Course API Sucess',
+  props<{ response: Course }>()
+);
+
+//delete
+
+export const invokeDeleteCourseApi = createAction(
+  '[Course API] invoke Delete Course API',
+  props<{ id: number }>()
+);
+
+export const deleteCourseAPISucess = createAction(
+  '[Course API] Delete Course API Sucess',
+  props<{ id: number }>()
+);

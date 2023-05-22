@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   invokeCoursesApi,
+  invokeDeleteCourseApi,
   invokeSaveCourseApi,
   invokeUpdateCourseApi,
 } from '../store/courses.action';
@@ -64,6 +65,7 @@ export class HomeComponent implements OnInit {
   createModal: any;
   editModal: any;
   deleteModal: any;
+  idtoDelete: any;
 
   Courses$ = this.store.pipe(select(selectCourse));
 
@@ -120,7 +122,21 @@ export class HomeComponent implements OnInit {
     location.reload();
   }
 
-  openDeleteModal() {
+  openDeleteModal(id: number) {
+    this.idtoDelete = id;
     this.deleteModal.show();
+  }
+  confirmDelete() {
+    this.store.dispatch(invokeDeleteCourseApi({ id: this.idtoDelete }));
+
+    let appstate$ = this.appState.pipe(select(selectAppState));
+    appstate$.subscribe((data) => {
+      if (data.apiStatus === 'sucess') {
+        this.appState.dispatch(
+          setAPIStatus({ apiStatus: { apiStatus: '', apiResponseMessage: '' } })
+        );
+      }
+    });
+    this.deleteModal.hide();
   }
 }

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Course } from './course';
-import { coursesFetchAPISucess, saveCourseAPISucess, updateCourseAPISucess } from './courses.action';
+import { coursesFetchAPISucess, deleteCourseAPISucess, saveCourseAPISucess, updateCourseAPISucess } from './courses.action';
 
 export const InitialState: ReadonlyArray<Course> = [];
 
@@ -19,4 +19,8 @@ export const CoursesReducer = createReducer(
     newState.unshift(response);
     return newState;
   }),
+  on(deleteCourseAPISucess, (state, { id }) => {
+    let newState = state.filter((_) => _.id !== id);
+    return newState;
+  })
 );

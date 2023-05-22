@@ -4,7 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import {
   coursesFetchAPISucess,
+  deleteCourseAPISucess,
   invokeCoursesApi,
+  invokeDeleteCourseApi,
   invokeSaveCourseApi,
   invokeUpdateCourseApi,
   saveCourseAPISucess,
@@ -79,5 +81,26 @@ export class CoursesEffects {
       );
     })
   )
+);
+
+deleteCourse$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(invokeDeleteCourseApi),
+  switchMap((action) => {
+    this.appState.dispatch(
+      setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
+    );
+    return this.CoursesService.delete(action.id).pipe(
+      map((data) => {
+        this.appState.dispatch(
+          setAPIStatus({
+            apiStatus: { apiResponseMessage: '', apiStatus: 'success' },
+          })
+        );
+        return deleteCourseAPISucess({ id: action.id });
+      })
+    );
+  })
+)
 );
 }

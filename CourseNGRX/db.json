@@ -12,17 +12,9 @@
       "id": 2,
       "courseauthor": "Simão Pereira",
       "coursetitle": "Angular",
-      "cost": 100,
+      "cost": 19,
       "img": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",
-      "description": "qwerty loop\n"
-    },
-    {
-      "id": 3,
-      "courseauthor": "Simão Pereira",
-      "coursetitle": "Angular",
-      "cost": 100,
-      "img": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",
-      "description": "1234"
+      "description": "Full Course Angular\n"
     }
   ]
 }

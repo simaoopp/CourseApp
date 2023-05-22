@@ -24,4 +24,8 @@ export class CoursesService {
       payload
     );
   }
+
+  delete(id:number){
+    return this.http.delete(`http://localhost:3000/courses/${id}`)
+  }
 }
