@@ -21,3 +21,15 @@ export const saveCourseAPISucess = createAction(
   '[Course API] Save Course API Sucess',
   props<{ response: Course }>()
 );
+
+//put
+export const invokeUpdateCourseApi = createAction(
+    '[Course API] invoke Update Course API',
+    props<{ payload: Course }>()
+  );
+  
+  export const updateCourseAPISucess = createAction(
+    '[Course API] Save Course API Sucess',
+    props<{ response: Course }>()
+  );
+  

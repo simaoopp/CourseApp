@@ -30,7 +30,7 @@
         <div class="card-body">
           <button
             class="btn btn-outline-primary btn-sm"
-            (click)="openEditModal()"
+            (click)="openEditModal(course.id)"
           >
             <i class="fa-solid fa-pen-to-square"></i>
           </button>
@@ -90,7 +90,9 @@
             />
           </div>
           <div class="mb-3">
-            <label for="txtCourseAuthor" class="form-label">Course Author</label>
+            <label for="txtCourseAuthor" class="form-label"
+              >Course Author</label
+            >
             <input
               type="text"
               [(ngModel)]="NewCourseForm.courseauthor"
@@ -126,7 +128,9 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary" (click)="save()">Create</button>
+        <button type="button" class="btn btn-primary" (click)="save()">
+          Create
+        </button>
       </div>
     </div>
   </div>
@@ -144,7 +148,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Course</h1>
+        <legend>Update Course</legend>
         <button
           type="button"
           class="btn-close"
@@ -156,25 +160,58 @@
         <form>
           <div class="mb-3">
             <label for="image" class="col-form-label">Course URL image:</label>
-            <input type="text" class="form-control" id="imageEdit" />
+
+            <input
+              type="text"
+              [(ngModel)]="EditCourseForm.img"
+              [ngModelOptions]="{ standalone: true }"
+              class="form-control"
+              id="imageEdit"
+            />
           </div>
+
           <div class="mb-3">
             <label for="name" class="col-form-label">Course Name:</label>
-            <input type="text" class="form-control" id="nameEdit" />
+            <input
+              type="text"
+              [(ngModel)]="EditCourseForm.coursetitle"
+              [ngModelOptions]="{ standalone: true }"
+              class="form-control"
+              id="nameEdit"
+            />
           </div>
           <div class="mb-3">
-            <label for="author" class="col-form-label">Author Name:</label>
-            <input type="text" class="form-control" id="authorEdit" />
+            <label for="author" class="col-form-label">Course Author:</label>
+            <input
+              type="text"
+              [(ngModel)]="EditCourseForm.courseauthor"
+              [ngModelOptions]="{ standalone: true }"
+              class="form-control"
+              id="authorEdit"
+            />
           </div>
+
           <div class="mb-3">
-            <label for="cost" class="col-form-label">Cost:</label>
-            <input type="text" class="form-control" id="costEdit" />
+            <label for="cost" class="col-form-label">Course Cost:</label>
+            <input
+              type="number"
+              [(ngModel)]="EditCourseForm.cost"
+              [ngModelOptions]="{ standalone: true }"
+              class="form-control"
+              id="costEdit"
+            />
           </div>
+
           <div class="mb-3">
             <label for="description" class="col-form-label"
               >Description Name:</label
             >
-            <textarea class="form-control" id="descriptionEdit"></textarea>
+            <textarea
+              class="form-control"
+              [(ngModel)]="EditCourseForm.description"
+              [ngModelOptions]="{ standalone: true }"
+              id="descriptionEdit"
+            ></textarea>
           </div>
         </form>
       </div>
@@ -182,7 +219,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-primary" (click)="update()">Update</button>
       </div>
     </div>
   </div>

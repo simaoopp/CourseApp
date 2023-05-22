@@ -6,7 +6,9 @@ import {
   coursesFetchAPISucess,
   invokeCoursesApi,
   invokeSaveCourseApi,
+  invokeUpdateCourseApi,
   saveCourseAPISucess,
+  updateCourseAPISucess,
 } from './courses.action';
 import { selectCourse } from './courses.selector';
 import { EMPTY, map, switchMap, withLatestFrom } from 'rxjs';
@@ -57,5 +59,25 @@ export class CoursesEffects {
       })
     )
   );
-  
+
+  updateCourse$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(invokeUpdateCourseApi),
+    switchMap((action) => {
+      this.appState.dispatch(
+        setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
+      );
+      return this.CoursesService.update(action.payload).pipe(
+        map((data) => {
+          this.appState.dispatch(
+            setAPIStatus({
+              apiStatus: { apiResponseMessage: '', apiStatus: 'success' },
+            })
+          );
+          return updateCourseAPISucess({ response: data });
+        })
+      );
+    })
+  )
+);
 }
