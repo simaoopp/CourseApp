@@ -1,0 +1,11 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "course-title": "NGRX courses",
+      "course-author": "typicode",
+      "description": "Curso muito bom para iniciantes de NGRX.",
+      "cost": 10
+    }
+  ]
+}
