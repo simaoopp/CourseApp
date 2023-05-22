@@ -1,129 +1,219 @@
 <div class="container mt-2">
-    <div class="row">
-      <div class="col">
-        <a class="btn btn-outline-info btn-sm" style="margin-bottom: 10px;"  (click)="openCreateModal()"><i class="fa-solid fa-plus"></i> Add A New Course</a>
-      </div>
-      <hr />
+  <div class="row">
+    <div class="col">
+      <a
+        class="btn btn-outline-info btn-sm"
+        style="margin-bottom: 10px"
+        (click)="openCreateModal()"
+        ><i class="fa-solid fa-plus"></i> Add A New Course</a
+      >
     </div>
-    <div class="row row-cols-1 row-cols-md-2 g-4" style="text-align: center;">
-      <div class="coll" *ngFor="let course of Courses$ | async">
-        <div class="card">
-          <img src="{{course.img}}" style="width: auto; height: auto;" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{course.coursetitle}}</h5>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">{{course.courseauthor}}</li>
-              <li class="list-group-item">{{course.cost}}</li>
-              <li class="list-group-item">{{course.description}}</li>
-            </ul>
-          </div>
-          <div class="card-body">
-            <button class="btn btn-outline-primary btn-sm" (click)="openEditModal()"><i class="fa-solid fa-pen-to-square"></i></button> |
-            <button class="btn btn-outline-danger btn-sm" (click)="openDeleteModal()"><i class="fa-solid fa-trash-can"></i></button>
-          </div>
+    <hr />
+  </div>
+  <div class="row row-cols-1 row-cols-md-2 g-4" style="text-align: center">
+    <div class="coll" *ngFor="let course of Courses$ | async">
+      <div class="card">
+        <img
+          src="{{ course.img }}"
+          style="width: auto; height: auto"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ course.coursetitle }}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ course.courseauthor }}</li>
+            <li class="list-group-item">{{ course.cost }}</li>
+            <li class="list-group-item">{{ course.description }}</li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <button
+            class="btn btn-outline-primary btn-sm"
+            (click)="openEditModal()"
+          >
+            <i class="fa-solid fa-pen-to-square"></i>
+          </button>
+          |
+          <button
+            class="btn btn-outline-danger btn-sm"
+            (click)="openDeleteModal()"
+          >
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
-
+</div>
 
 <!-- open Create Modal -->
 
-<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">New Course</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-                <label for="image" class="col-form-label">Course URL image:</label>
-                <input type="text" class="form-control" id="image">
-              </div>
-            <div class="mb-3">
-              <label for="name" class="col-form-label">Course Name:</label>
-              <input type="text" class="form-control" id="name">
-            </div>
-            <div class="mb-3">
-                <label for="author" class="col-form-label">Author Name:</label>
-                <input type="text" class="form-control" id="author">
-            </div>
-            <div class="mb-3">
-                <label for="cost" class="col-form-label">Cost:</label>
-                <input type="text" class="form-control" id="cost">
-            </div>
-            <div class="mb-3">
-              <label for="description" class="col-form-label">Description Name:</label>
-              <textarea class="form-control" id="description"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Create</button>
-        </div>
+<div
+  class="modal fade"
+  id="createModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <legend>Add New Book</legend>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="txtCourseImage" class="form-label">Course Image</label>
+            <input
+              type="text"
+              [(ngModel)]="NewCourseForm.img"
+              [ngModelOptions]="{ standalone: true }"
+              id="txtCourseImage"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="txtCourseName" class="form-label">Course Name</label>
+            <input
+              type="text"
+              [(ngModel)]="NewCourseForm.coursetitle"
+              [ngModelOptions]="{ standalone: true }"
+              id="txtCourseName"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="txtCourseAuthor" class="form-label">Course Author</label>
+            <input
+              type="text"
+              [(ngModel)]="NewCourseForm.courseauthor"
+              [ngModelOptions]="{ standalone: true }"
+              id="txtCourseAuthor"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="txtCourseCost" class="form-label">Course Cost</label>
+            <input
+              type="number"
+              [(ngModel)]="NewCourseForm.cost"
+              [ngModelOptions]="{ standalone: true }"
+              id="txtCourseCost"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="txtCourseDescription" class="col-form-label"
+              >Course Description:</label
+            >
+            <textarea
+              class="form-control"
+              [(ngModel)]="NewCourseForm.description"
+              [ngModelOptions]="{ standalone: true }"
+              id="txtCourseDescription"
+            ></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="save()">Create</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- open edit Modal -->
+<!-- open edit Modal -->
 
-  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Course</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-                <label for="image" class="col-form-label">Course URL image:</label>
-                <input type="text" class="form-control" id="image">
-              </div>
-            <div class="mb-3">
-              <label for="name" class="col-form-label">Course Name:</label>
-              <input type="text" class="form-control" id="name">
-            </div>
-            <div class="mb-3">
-                <label for="author" class="col-form-label">Author Name:</label>
-                <input type="text" class="form-control" id="author">
-            </div>
-            <div class="mb-3">
-                <label for="cost" class="col-form-label">Cost:</label>
-                <input type="text" class="form-control" id="cost">
-            </div>
-            <div class="mb-3">
-              <label for="description" class="col-form-label">Description Name:</label>
-              <textarea class="form-control" id="description"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Update</button>
-        </div>
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Course</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="image" class="col-form-label">Course URL image:</label>
+            <input type="text" class="form-control" id="imageEdit" />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="col-form-label">Course Name:</label>
+            <input type="text" class="form-control" id="nameEdit" />
+          </div>
+          <div class="mb-3">
+            <label for="author" class="col-form-label">Author Name:</label>
+            <input type="text" class="form-control" id="authorEdit" />
+          </div>
+          <div class="mb-3">
+            <label for="cost" class="col-form-label">Cost:</label>
+            <input type="text" class="form-control" id="costEdit" />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="col-form-label"
+              >Description Name:</label
+            >
+            <textarea class="form-control" id="descriptionEdit"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Update</button>
       </div>
     </div>
   </div>
+</div>
 
 <!-- open delete Modal-->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Are you sure to delete this Course?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger">Confirm Delete</button>
-        </div>
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Are you sure to delete this Course?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-danger">Confirm Delete</button>
       </div>
     </div>
   </div>
+</div>

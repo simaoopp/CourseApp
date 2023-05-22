@@ -13,4 +13,15 @@ export class CoursesService {
   get() {
     return this.http.get<Course[]>('http://localhost:3000/courses');
   }
+
+  create(payload: Course) {
+    return this.http.post<Course>('http://localhost:3000/courses', payload);
+  }
+
+  update(payload: Course) {
+    return this.http.put<Course>(
+      `http://localhost:3000/courses/${payload.id}`,
+      payload
+    );
+  }
 }
