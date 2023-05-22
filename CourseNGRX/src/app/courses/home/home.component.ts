@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { invokeCoursesApi } from '../store/courses.action';
+import { Store, select } from '@ngrx/store';
+import { selectCourse } from '../store/courses.selector';
 
 declare var window: any;
 
@@ -11,7 +14,9 @@ export class HomeComponent implements OnInit {
   createModal: any;
   editModal: any;
   deleteModal: any;
-  constructor() {}
+  constructor(private store: Store) {}
+
+  Courses$ = this.store.pipe(select(selectCourse));
 
   ngOnInit(): void {
     this.createModal = new window.bootstrap.Modal(
@@ -24,6 +29,8 @@ export class HomeComponent implements OnInit {
     this.deleteModal = new window.bootstrap.Modal(
       document.getElementById('deleteModal')
     );
+
+    this.store.dispatch(invokeCoursesApi());
   }
 
   openCreateModal() {

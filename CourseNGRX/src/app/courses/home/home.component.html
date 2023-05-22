@@ -6,15 +6,15 @@
       <hr />
     </div>
     <div class="row row-cols-1 row-cols-md-2 g-4" style="text-align: center;">
-      <div>
+      <div class="coll" *ngFor="let course of Courses$ | async">
         <div class="card">
-          <img style="width: auto; height: auto;" class="card-img-top" alt="...">
+          <img src="{{course.img}}" style="width: auto; height: auto;" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Curso</h5>
+            <h5 class="card-title">{{course.coursetitle}}</h5>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Autor</li>
-              <li class="list-group-item">Custo</li>
-              <li class="list-group-item">Descrição</li>
+              <li class="list-group-item">{{course.courseauthor}}</li>
+              <li class="list-group-item">{{course.cost}}</li>
+              <li class="list-group-item">{{course.description}}</li>
             </ul>
           </div>
           <div class="card-body">
@@ -38,6 +38,10 @@
         </div>
         <div class="modal-body">
           <form>
+            <div class="mb-3">
+                <label for="image" class="col-form-label">Course URL image:</label>
+                <input type="text" class="form-control" id="image">
+              </div>
             <div class="mb-3">
               <label for="name" class="col-form-label">Course Name:</label>
               <input type="text" class="form-control" id="name">
@@ -75,6 +79,10 @@
         </div>
         <div class="modal-body">
           <form>
+            <div class="mb-3">
+                <label for="image" class="col-form-label">Course URL image:</label>
+                <input type="text" class="form-control" id="image">
+              </div>
             <div class="mb-3">
               <label for="name" class="col-form-label">Course Name:</label>
               <input type="text" class="form-control" id="name">
