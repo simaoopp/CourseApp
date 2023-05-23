@@ -7,14 +7,6 @@
       "description": "Curso muito bom para iniciantes de NGRX.",
       "cost": 10,
       "img": "https://ngrx.io/assets/images/badge.svg"
-    },
-    {
-      "id": 2,
-      "courseauthor": "Simão Pereira",
-      "coursetitle": "Angular",
-      "cost": 19,
-      "img": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",
-      "description": "Full Course Angular\n"
     }
   ]
 }

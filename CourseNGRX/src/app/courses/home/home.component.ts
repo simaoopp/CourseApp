@@ -13,6 +13,7 @@ import { Appstate } from 'src/app/shared/store/appstate';
 import { setAPIStatus } from 'src/app/shared/store/app.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { StoreDispatchService } from '../store-dispatch.service';
 
 declare var window: any;
 
@@ -22,11 +23,18 @@ declare var window: any;
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+
+  createModal: any;
+  editModal: any;
+  deleteModal: any;
+  idtoDelete: any;
+
   constructor(
     private store: Store,
     private appState: Store<Appstate>,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storeDispatch: StoreDispatchService
   ) {}
 
   NewCourseForm: Course = {
@@ -38,6 +46,7 @@ export class HomeComponent implements OnInit {
     description: '',
   };
 
+
   EditCourseForm: Course = {
     id: 0,
     courseauthor: '',
@@ -48,24 +57,21 @@ export class HomeComponent implements OnInit {
   };
 
   save() {
-    this.store.dispatch(
-      invokeSaveCourseApi({ payload: { ...this.NewCourseForm } })
-    );
-    let appstate$ = this.appState.pipe(select(selectAppState));
-    appstate$.subscribe((data) => {
-      if (data.apiStatus === 'sucess') {
-        this.appState.dispatch(
-          setAPIStatus({ apiStatus: { apiStatus: '', apiResponseMessage: '' } })
-        );
-      }
-    });
-    location.reload();
+    this.storeDispatch.saveNewCourse(this.NewCourseForm);
+    this.createModal.hide();
+    this.ClearNewCourseForm();
   }
 
-  createModal: any;
-  editModal: any;
-  deleteModal: any;
-  idtoDelete: any;
+  ClearNewCourseForm() {
+    this.NewCourseForm = {
+      id: 0,
+      courseauthor: '',
+      coursetitle: '',
+      cost: 0,
+      img: '',
+      description: '',
+    };
+  }
 
   Courses$ = this.store.pipe(select(selectCourse));
 
@@ -81,7 +87,7 @@ export class HomeComponent implements OnInit {
       document.getElementById('deleteModal')
     );
 
-    this.store.dispatch(invokeCoursesApi());
+    this.storeDispatch.showCourses();
   }
 
   openCreateModal() {
@@ -107,19 +113,8 @@ export class HomeComponent implements OnInit {
   }
 
   update() {
-    this.store.dispatch(
-      invokeUpdateCourseApi({ payload: { ...this.EditCourseForm } })
-    );
-
-    let appstate$ = this.appState.pipe(select(selectAppState));
-    appstate$.subscribe((data) => {
-      if (data.apiStatus === 'sucess') {
-        this.appState.dispatch(
-          setAPIStatus({ apiStatus: { apiStatus: '', apiResponseMessage: '' } })
-        );
-      }
-    });
-    location.reload();
+    this.storeDispatch.updateCourse(this.EditCourseForm);
+    this.editModal.hide();
   }
 
   openDeleteModal(id: number) {
@@ -127,16 +122,7 @@ export class HomeComponent implements OnInit {
     this.deleteModal.show();
   }
   confirmDelete() {
-    this.store.dispatch(invokeDeleteCourseApi({ id: this.idtoDelete }));
-
-    let appstate$ = this.appState.pipe(select(selectAppState));
-    appstate$.subscribe((data) => {
-      if (data.apiStatus === 'sucess') {
-        this.appState.dispatch(
-          setAPIStatus({ apiStatus: { apiStatus: '', apiResponseMessage: '' } })
-        );
-      }
-    });
+    this.storeDispatch.deleteCourse(this.idtoDelete);
     this.deleteModal.hide();
   }
 }
