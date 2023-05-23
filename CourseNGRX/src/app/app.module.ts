@@ -8,6 +8,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { AppReducer } from './shared/store/app.reducer';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   {
@@ -24,6 +26,7 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     StoreModule.forRoot({myAppState: AppReducer}),

@@ -8,6 +8,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { CoursesReducer } from './store/courses.reducer';
 import { CoursesEffects } from './store/courses.effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Routes = [
   {
@@ -24,6 +26,7 @@ const routes: Routes = [
     CommonModule,
     HttpClientModule,
     FormsModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('myCourse', CoursesReducer),
