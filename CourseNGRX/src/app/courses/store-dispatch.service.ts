@@ -6,6 +6,7 @@ import { Appstate } from '../shared/store/appstate';
 import { selectAppState } from '../shared/store/app.selector';
 import { Form } from '@angular/forms';
 import { Course } from './store/course';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class StoreDispatchService {
 
   constructor(
      private store: Store,
-    private appState: Store<Appstate>,) { }
+    private appState: Store<Appstate>,
+    private toastr: ToastrService) { }
 
     showCourses() {
       this.store.dispatch(invokeCoursesApi());
@@ -33,6 +35,7 @@ export class StoreDispatchService {
         );
       }
     });
+    this.toastr.success('New course added successfully');
   }
 
   updateCourse(EditCourseForm: Course) {
@@ -48,6 +51,7 @@ export class StoreDispatchService {
         );
       }
     });
+    this.toastr.success('Successfully updated course');
   }
 
   deleteCourse(idCourse: number) {
@@ -61,6 +65,8 @@ export class StoreDispatchService {
         );
       }
     });
+    this.toastr.success('Successfully deleted course');
   }
+  
 
 }
